@@ -2,6 +2,9 @@ package com.example.springjenkins.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,10 +18,15 @@ import java.util.List;
 @Service
 public class JenkinsService {
 
+    private final Logger log = LoggerFactory.getLogger(JenkinsService.class);
+
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String jenkinsUrl = "https://jenkins.istad.co/";
+
+    @Value("${jenkins.url}")
+    public String jenkinsUrl;
     private final String jenkinsUser = "makara";
     private final String jenkinsToken = "1179bc8f15b27a3f06c7bfd7c7c578334d";
+
 
     public List<String> getJobNames() {
         List<String> jobNames = new ArrayList<>();
@@ -33,6 +41,8 @@ public class JenkinsService {
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+            log.info("Response: {}", response.getBody());
 
             // Parse the JSON response
             ObjectMapper objectMapper = new ObjectMapper();
