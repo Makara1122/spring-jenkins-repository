@@ -39,6 +39,7 @@ sonar {
     properties {
         property "sonar.projectKey", "sonar"
         property "sonar.projectName", "sonar"
+        property "sonar.login", "sqa_76cb9d582bf44e231409f372d8e22b600ff6b79c"
     }
 }
 
