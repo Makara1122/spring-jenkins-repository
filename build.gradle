@@ -39,7 +39,7 @@ sonar {
     properties {
         property "sonar.projectKey", "sonar"
         property "sonar.projectName", "sonar"
-        property "sonar.java.binaries", "build/classes/java/main"
+        property "sonar.java.binaries", "build/classes/java/main" 
     }
 }
 
